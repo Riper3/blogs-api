@@ -7,7 +7,8 @@ class Blog {
         const sql = 'SELECT * FROM blogs';
 
         res.send(await db.queryPlain(sql));
-    }
+    };
+
     static async getBlog(req, res) {
         const blogname = req.params.name;
 
@@ -16,15 +17,17 @@ class Blog {
         const sql = 'SELECT * FROM blogs WHERE ' + where;
 
         res.send(await db.queryWhere(sql, values));
-    }
-    static async insertBlog(req, res) {
-        console.log('Get a blog')
-        res.send('Get a blog')
-    }
-    static async updateBlog(req, res) {
-        console.log('Get a blog')
-        res.send('Get a blog')
-    }
-}
+    };
 
-module.exports = Blog
+    static async insertBlog(req, res) {
+        console.log('Get a blog');
+        res.send('Get a blog');
+    };
+
+    static async updateBlog(req, res) {
+        console.log('Get a blog');
+        res.send('Get a blog');
+    };
+};
+
+module.exports = Blog;

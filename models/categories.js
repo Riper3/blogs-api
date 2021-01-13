@@ -1,4 +1,4 @@
-const db = require('./db.js')
+const db = require('./db.js');
 
 class Category {
     static async getCategories(req, res) {
@@ -7,7 +7,7 @@ class Category {
         db.queryPlain(sql).then((categories) => {
           res.send(categories);
         });
-    }
+    };
 
     static async getCategory(req, res) {
         const categoryname = req.params.name;
@@ -30,27 +30,27 @@ class Category {
               let subcategory = {
                 'subcategory' : cat.subcategory,
                 'subcategory_id' : cat.subcategory_id
-              }
+              };
 
               categoryresult.subcategories.push(subcategory);
-            }
+            };
 
             res.send(categoryresult);
           } else {
             res.send('Not found');
           }
         });
-    }
+    };
 
     static async insertCategory(req, res) {
         console.log('Insert a category');
-        res.send('Insert a category')
-    }
+        res.send('Insert a category');
+    };
 
     static async updateCategory(req, res) {
-        console.log('Update a category')
-        res.send('Update a category')
-    }
-}
+        console.log('Update a category');
+        res.send('Update a category');
+    };
+};
 
-module.exports = Category
+module.exports = Category;
