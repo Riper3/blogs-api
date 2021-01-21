@@ -9,6 +9,12 @@ class Blog {
         res.send(await db.queryPlain(sql));
     };
 
+    static async getLatestBlogs(req, res) {
+      const sql = 'SELECT * FROM BLOGS ORDER BY upload_date DESC LIMIT 5';
+
+      res.send(await db.queryPlain(sql));
+    }
+
     static async getBlog(req, res) {
         const blogname = req.params.name;
 
