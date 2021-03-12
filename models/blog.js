@@ -1,7 +1,7 @@
 const db = require('./db.js');
 const formatImages = require('../share/formatimages.js');
 
-const selectquery = `SELECT bc.title, bc.description, bc.content, l.name language, l.symbol lang_code, c.name category, sc.name subcategory, GROUP_CONCAT(bi.path) images
+const selectquery = `SELECT bc.title, bc.url, bc.description, bc.content, l.name language, l.symbol lang_code, c.name category, sc.name subcategory, GROUP_CONCAT(bi.path) images
                      FROM blogs b LEFT
                      JOIN blogs_content bc on b.blog_id = bc.blog_id
                      LEFT JOIN languages l on bc.lang_id = l.lang_id
@@ -35,9 +35,9 @@ class Blog {
     static async getBlog(req, res) {
         const blogname = req.params.name;
 
-        const where = ' WHERE bc.title = ?';
+        const where = ' WHERE bc.url = ? GROUP BY b.blog_id';
         const values = [blogname];
-        const sql = selectquery.substring(0, 540) + where + selectquery.substring(540, selectquery.length);
+        const sql = selectquery.split('GROUP BY b.blog_id')[0] + where;
 
         const result = await db.queryWhere(sql, values);
 
